@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>沈姓起源</title>
+
+  <!-- CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600,500&f[]=plus-jakarta-sans@400,500,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    html { height: 100%; }
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    body { min-height: 100%; overflow-x: hidden; }
+
+    :root {
+      --bg-primary:   #F7F3ED;
+      --bg-secondary: #ECEAE4;
+      --bg-sage:      #C8D5CA;
+      --bg-sage-light:#D8E5DB;
+      --bg-dark:      #1A1A1A;
+      --bg-card:      #FFFFFF;
+
+      --text-primary:   #1A1A18;
+      --text-secondary: rgba(26,26,24,0.6);
+      --text-muted:     rgba(26,26,24,0.4);
+      --text-on-dark:   #F7F3ED;
+      --text-on-sage:   #1A1A18;
+
+      --accent:         #1A1A18;
+      --accent-hover:   #2C2C2A;
+      --accent-sage:    #5A7A5F;
+
+      --border:         rgba(26,26,24,0.10);
+      --border-strong:  rgba(26,26,24,0.18);
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.10), 0 6px 16px rgba(0,0,0,0.06);
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+
+      --duration-fast: 150ms;
+      --duration-base: 250ms;
+      --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1.0);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Grain */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Nav */
+    .nav {
+      height: 56px;
+      background: rgba(247,243,237,0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+    .nav-meta {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* Container */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 2.5rem; }
+    .container-narrow { max-width: 720px; margin: 0 auto; padding: 0 2.5rem; }
+
+    /* Section */
+    .section { padding: 7rem 0; }
+    .section-sm { padding: 4.5rem 0; }
+    .section-sage { background: var(--bg-sage); }
+    .section-secondary { background: var(--bg-secondary); }
+    .section-dark { background: var(--bg-dark); color: var(--text-on-dark); }
+
+    .divider { height: 1px; background: var(--border); }
+
+    /* Eyebrow */
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .eyebrow-on-sage { color: rgba(26,26,24,0.5); }
+    .eyebrow-on-dark { color: rgba(247,243,237,0.45); }
+
+    /* Hero */
+    .hero-char {
+      font-family: var(--font-display);
+      font-size: clamp(7rem, 20vw, 16rem);
+      font-weight: 400;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      display: block;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      margin-top: 1.5rem;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .hero-stat-label {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Section headings */
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .section-heading-sm {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+    }
+
+    /* Etymology */
+    .etymology-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .etymology-char-block {
+      position: sticky;
+      top: 5rem;
+    }
+    .etymology-char {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 12vw, 9rem);
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      display: block;
+    }
+    .etymology-char-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+    }
+    .etymology-tag {
+      display: inline-block;
+      background: var(--bg-dark);
+      color: var(--text-on-dark);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.03em;
+      margin-top: 1.5rem;
+    }
+
+    .etymology-body p {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .etymology-body p:last-child { margin-bottom: 0; }
+    .etymology-body strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .etymology-quote {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      border-left: 2px solid var(--accent-sage);
+      background: rgba(200,213,202,0.15);
+      border-radius: 0 8px 8px 0;
+    }
+    .etymology-quote p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.125rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem !important;
+    }
+    .etymology-quote cite {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* Origins */
+    .origin-list { display: flex; flex-direction: column; gap: 0; }
+    .origin-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .origin-item:first-child { border-top: 1px solid var(--border); }
+    .origin-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: rgba(26,26,24,0.12);
+      line-height: 1;
+      padding-top: 0.25rem;
+    }
+    .origin-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.5rem;
+    }
+    .origin-tag {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent-sage);
+      background: rgba(90,122,95,0.1);
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-bottom: 0.75rem;
+    }
+    .origin-content p {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1px 1fr;
+      gap: 0 2rem;
+      padding-bottom: 3rem;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-era { text-align: right; padding-top: 0.2rem; }
+    .timeline-dynasty {
+      font-family: var(--font-display);
+      font-size: 1.0625rem;
+      font-weight: 400;
+      color: var(--text-on-sage);
+    }
+    .timeline-period {
+      font-size: 0.75rem;
+      color: rgba(26,26,24,0.4);
+      display: block;
+      margin-top: 2px;
+    }
+    .timeline-line-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .timeline-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--text-on-sage);
+      flex-shrink: 0;
+      margin-top: 0.35rem;
+      box-shadow: 0 0 0 3px rgba(200,213,202,0.4);
+    }
+    .timeline-connector {
+      width: 1px;
+      flex: 1;
+      background: rgba(26,26,24,0.15);
+      margin-top: 6px;
+    }
+    .timeline-item:last-child .timeline-connector { display: none; }
+    .timeline-text {
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      color: var(--text-on-sage);
+      padding-bottom: 0.5rem;
+    }
+    .timeline-text strong { color: var(--text-on-sage); font-weight: 600; }
+
+    /* Figures grid */
+    .figures-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .figure-card {
+      background: var(--bg-card);
+      padding: 2rem 1.75rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--duration-base) var(--ease-out);
+    }
+    .figure-card:hover { background: var(--bg-secondary); }
+    .figure-card:nth-child(3n) { border-right: none; }
+    .figure-card:nth-child(n+4) { border-bottom: none; }
+    .figure-name {
+      font-family: var(--font-display);
+      font-size: 1.625rem;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.25rem;
+    }
+    .figure-era {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .figure-desc {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* Hall names */
+    .hall-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .hall-group h4 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(247,243,237,0.4);
+      margin-bottom: 1.25rem;
+    }
+    .hall-tags { display: flex; flex-wrap: wrap; gap: 0.625rem; }
+    .hall-tag {
+      padding: 7px 18px;
+      border: 1px solid rgba(247,243,237,0.2);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      color: rgba(247,243,237,0.8);
+      letter-spacing: 0.02em;
+      transition: border-color var(--duration-fast), color var(--duration-fast);
+    }
+    .hall-tag:hover {
+      border-color: rgba(247,243,237,0.5);
+      color: var(--text-on-dark);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-text {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 0 1.25rem; }
+      .container-narrow { padding: 0 1.25rem; }
+      .section { padding: 4.5rem 0; }
+      .nav { padding: 0 1.25rem; }
+
+      .etymology-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .etymology-char-block { position: static; }
+
+      .timeline-item { grid-template-columns: 72px 1px 1fr; gap: 0 1.25rem; }
+
+      .figures-grid { grid-template-columns: repeat(2, 1fr); }
+      .figure-card:nth-child(3n) { border-right: 1px solid var(--border); }
+      .figure-card:nth-child(2n) { border-right: none; }
+      .figure-card:nth-child(n+5) { border-bottom: none; }
+      .figure-card:nth-child(5) { border-bottom: 1px solid var(--border); }
+      .figure-card:nth-child(6) { border-bottom: none; }
+
+      .hall-section { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-meta { gap: 1.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0ms !important; transition-duration: 0ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <span class="nav-logo">沈 · 百家姓考</span>
+    <span class="nav-meta">姓氏文化系列</span>
+  </nav>
+
+  <!-- ① Hero -->
+  <section class="section" style="padding-top: 6rem; padding-bottom: 5rem; position: relative; overflow: hidden;">
+    <!-- Hero 背景图 -->
+    <div style="position: absolute; inset: 0; z-index: 0;">
+      <img src="./shen_hero.jpg"
+           alt="" role="presentation"
+           style="width:100%; height:100%; object-fit:cover; opacity:0.12; filter: saturate(0.3);">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg, var(--bg-primary) 40%, rgba(247,243,237,0.7) 100%);"></div>
+    </div>
+    <div class="container" style="position:relative;z-index:1;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;">
+        <div data-reveal="fade-up">
+          <p class="eyebrow">百家姓 · 第 37 位</p>
+          <span class="hero-char">沈</span>
+        </div>
+        <div data-reveal="fade-up" style="padding-bottom: 1rem;">
+          <p class="hero-title">水深而潜，<br>姓以国传</p>
+          <div class="hero-meta">
+            <div>
+              <div class="hero-stat-num">37<span style="font-size:1rem;color:var(--text-muted);margin-left:2px;">位</span></div>
+              <div class="hero-stat-label">全国姓氏排名</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">0.56<span style="font-size:1rem;color:var(--text-muted);margin-left:1px;">%</span></div>
+              <div class="hero-stat-label">占汉族人口比例</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">3000<span style="font-size:1rem;color:var(--text-muted);margin-left:2px;">年</span></div>
+              <div class="hero-stat-label">有据可查的历史</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ② 字源解析 — 米白 -->
+  <section class="section">
+    <div class="container">
+      <div class="etymology-grid">
+        <div class="etymology-char-block" data-reveal="fade-up">
+          <!-- 字源配图 -->
+          <div style="border-radius:10px;overflow:hidden;margin-bottom:1.5rem;box-shadow:var(--shadow-md);">
+            <img src="./shen_etymology.jpg"
+                 alt="古籍字形"
+                 style="width:100%;display:block;filter:saturate(0.5) brightness(1.05);">
+          </div>
+          <span class="etymology-char">沈</span>
+          <p class="etymology-char-label">篆书字形</p>
+          <span class="etymology-tag">字源考</span>
+          <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+            <p style="font-size:0.8125rem; color: var(--text-muted); line-height: 1.7;">
+              从水，「冘」声<br>
+              本义：水深而潜<br>
+              引申：沉没、深沉
+            </p>
+          </div>
+        </div>
+        <div class="etymology-body" data-reveal="fade-up">
+          <p class="eyebrow">字源解析</p>
+          <h2 class="section-heading-sm" style="margin-bottom: 2rem;">从字形到姓氏，<br>一脉相承的来路</h2>
+          <p>「沈」字从水，「冘」声，本义为<strong>水深而潜</strong>，引申为沉没、深沉之意。作为地名，古称水深之地为「沈泽」。</p>
+          <div class="etymology-quote">
+            <p>「沈，陵上滈水也。」</p>
+            <cite>——《说文解字》</cite>
+          </div>
+          <p>水深的沼泽地带孕育了古老的沈国，而沈国的消亡，恰恰是沈姓诞生的起点。周文王第十子<strong>聃季载</strong>受封于沈地，建立沈国，国人以国为氏，沈姓由此延续三千年。</p>
+          <p>这是中国最常见的姓氏起源模式——<strong>以国为氏</strong>。国破家亡，姓氏却永远留存，成为那段历史最后的见证。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ③ 起源分支 — sage -->
+  <section class="section section-sage">
+    <div class="container">
+      <div style="max-width: 560px; margin-bottom: 4rem;" data-reveal="fade-up">
+        <p class="eyebrow eyebrow-on-sage">起源分支</p>
+        <h2 class="section-heading">三条来路，<br>同归一姓</h2>
+      </div>
+      <div class="origin-list" data-reveal="stagger">
+        <div class="origin-item">
+          <div class="origin-num">一</div>
+          <div class="origin-content">
+            <span class="origin-tag">主流 · 约占 85%</span>
+            <h3>姬姓沈氏 · 周室分封</h3>
+            <p>周文王第十子聃季载（季载），受封于沈国（今河南汝南、平舆一带）。公元前 506 年，沈国为蔡国所灭，聃季载的后裔以故国之名为姓，是为沈姓最主要来源。汝南郡自此成为沈氏第一郡望，历代传承。</p>
+          </div>
+        </div>
+        <div class="origin-item">
+          <div class="origin-num">二</div>
+          <div class="origin-content">
+            <span class="origin-tag">赐姓 · 楚国后裔</span>
+            <h3>芈姓沈氏 · 楚国分支</h3>
+            <p>春秋时期楚庄王之子公子贞受封沈邑（今安徽临泉），其后以邑为氏，形成另一支沈姓。此支与楚国王族同源，属芈姓系统，与姬姓沈氏同名异源，共同丰富了沈姓的血脉构成。</p>
+          </div>
+        </div>
+        <div class="origin-item">
+          <div class="origin-num">三</div>
+          <div class="origin-content">
+            <span class="origin-tag">改姓 · 少数民族</span>
+            <h3>汉化改姓 · 各族融合</h3>
+            <p>历史上满族、蒙古族、土家族、苗族等少数民族中均有改汉姓为沈氏者。满族叶赫那拉氏、沈佳氏等族群入关后，部分选择以「沈」为汉姓，融入中华姓氏体系，体现了中华民族长期融合的历史进程。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="background: rgba(26,26,24,0.08);"></div>
+
+  <!-- ④ 迁徙脉络 — 米白 secondary -->
+  <section class="section section-secondary">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: start;">
+        <div data-reveal="fade-up">
+          <p class="eyebrow">迁徙脉络</p>
+          <h2 class="section-heading" style="margin-bottom: 1.5rem;">从中原<br>到海外</h2>
+          <p style="font-size: 0.9375rem; line-height: 1.75; color: var(--text-secondary);">三千年间，沈氏从河南汝南出发，经战乱南迁、随商贸扩展、因移民出海，最终遍布全球华人世界。</p>
+          <!-- 迁徙地图配图 -->
+          <div style="margin-top:2rem;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-md);">
+            <img src="./shen_migration.jpg"
+                 alt="古代迁徙地图"
+                 style="width:100%;display:block;filter:saturate(0.45) brightness(1.05);">
+          </div>
+        </div>
+        <div class="timeline" data-reveal="stagger">
+          <div class="timeline-item">
+            <div class="timeline-era">
+              <span class="timeline-dynasty">先秦</span>
+              <span class="timeline-period">～前 221</span>
+            </div>
+            <div class="timeline-line-wrap">
+              <div class="timeline-dot"></div>
+              <div class="timeline-connector"></div>
+            </div>
+            <div class="timeline-text">
+              沈国灭亡后，族人散居<strong>楚地（今湖北、湖南）</strong>及中原一带，汝南为核心聚居地。
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">
+              <span class="timeline-dynasty">两汉</span>
+              <span class="timeline-period">前 206–220</span>
+            </div>
+            <div class="timeline-line-wrap">
+              <div class="timeline-dot"></div>
+              <div class="timeline-connector"></div>
+            </div>
+            <div class="timeline-text">
+              汝南郡确立为沈氏<strong>第一郡望</strong>，吴兴（今浙江湖州）沈氏兴起，奠定江南大族基础。
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">
+              <span class="timeline-dynasty">魏晋</span>
+              <span class="timeline-period">220–589</span>
+            </div>
+            <div class="timeline-line-wrap">
+              <div class="timeline-dot"></div>
+              <div class="timeline-connector"></div>
+            </div>
+            <div class="timeline-text">
+              <strong>吴兴沈氏</strong>崛起为江南望族，出将入相。北方战乱促使大批沈氏南渡，江浙人口激增。
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">
+              <span class="timeline-dynasty">唐宋</span>
+              <span class="timeline-period">618–1279</span>
+            </div>
+            <div class="timeline-line-wrap">
+              <div class="timeline-dot"></div>
+              <div class="timeline-connector"></div>
+            </div>
+            <div class="timeline-text">
+              沈氏遍布<strong>江苏、浙江、安徽、福建</strong>，随海上贸易向闽粤扩展，进入两广及云贵。
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-era">
+              <span class="timeline-dynasty">明清</span>
+              <span class="timeline-period">1368–1912</span>
+            </div>
+            <div class="timeline-line-wrap">
+              <div class="timeline-dot"></div>
+              <div class="timeline-connector"></div>
+            </div>
+            <div class="timeline-text">
+              随移民潮进入<strong>台湾及东南亚</strong>，东南亚华人社区中沈氏华侨分布广泛，影响延续至今。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ⑤ 历史名人 — sage -->
+  <section class="section section-sage">
+    <div class="container">
+      <div style="margin-bottom: 3.5rem;" data-reveal="fade-up">
+        <p class="eyebrow eyebrow-on-sage">历史名人</p>
+        <h2 class="section-heading">这些人，<br>都姓沈</h2>
+      </div>
+      <div class="figures-grid" data-reveal="stagger">
+        <div class="figure-card">
+          <div class="figure-name">沈括</div>
+          <div class="figure-era">北宋 · 1031–1095</div>
+          <p class="figure-desc">科学家、政治家。著《梦溪笔谈》，涉及天文、数学、物理、地质等领域，被誉为「中国科学史上的里程碑」，李约瑟称其为「中国整部科学史中最卓越的人物」。</p>
+        </div>
+        <div class="figure-card">
+          <div class="figure-name">沈约</div>
+          <div class="figure-era">南朝梁 · 441–513</div>
+          <p class="figure-desc">文学家、史学家。首创「四声八病」之说，奠定汉语声律学基础，对后世格律诗影响深远。著有正史《宋书》，吴兴沈氏最具代表性的历史人物之一。</p>
+        </div>
+        <div class="figure-card">
+          <div class="figure-name">沈周</div>
+          <div class="figure-era">明 · 1427–1509</div>
+          <p class="figure-desc">画家。「吴门画派」创始人，与文征明、唐寅、仇英合称「明四家」。山水画师法宋元，苍秀兼备，开创了影响深远的江南文人画传统。</p>
+        </div>
+        <div class="figure-card">
+          <div class="figure-name">沈从文</div>
+          <div class="figure-era">近代 · 1902–1988</div>
+          <p class="figure-desc">作家。著《边城》《湘行散记》，以湘西为背景构建纯美文学世界，文字如流水般自然。晚年转向文物研究，著《中国古代服饰研究》，同样成就卓著。</p>
+        </div>
+        <div class="figure-card">
+          <div class="figure-name">沈葆桢</div>
+          <div class="figure-era">清 · 1820–1879</div>
+          <p class="figure-desc">洋务派重臣。创建福建船政局，主持台湾防务建设，推动中国近代海军起步。其洋务思想与实践，为晚清自强运动写下重要篇章。</p>
+        </div>
+        <div class="figure-card">
+          <div class="figure-name">沈尹默</div>
+          <div class="figure-era">近代 · 1883–1971</div>
+          <p class="figure-desc">书法家、诗人。北大教授，新文化运动参与者，与陈独秀、李大钊共事。书法上力追晋唐，被誉为「当代书法第一人」，尤以行楷著称。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="background: rgba(26,26,24,0.08);"></div>
+
+  <!-- ⑥ 郡望堂号 — 深色 -->
+  <section class="section section-dark">
+    <div class="container">
+      <div style="margin-bottom: 4rem;" data-reveal="fade-up">
+        <p class="eyebrow eyebrow-on-dark">郡望 · 堂号</p>
+        <h2 class="section-heading" style="color: var(--text-on-dark);">根系所在，<br>堂号为证</h2>
+      </div>
+      <div class="hall-section" data-reveal="stagger">
+        <div class="hall-group">
+          <h4>郡望</h4>
+          <div class="hall-tags">
+            <span class="hall-tag">汝南郡</span>
+            <span class="hall-tag">吴兴郡</span>
+            <span class="hall-tag">陈留郡</span>
+            <span class="hall-tag">会稽郡</span>
+          </div>
+          <p style="font-size: 0.8125rem; color: rgba(247,243,237,0.35); margin-top: 1.25rem; line-height: 1.7;">郡望是古代姓氏的地域标记，表明该氏族的显贵发源地。汝南郡与吴兴郡为沈氏两大核心郡望，延续千年。</p>
+        </div>
+        <div class="hall-group">
+          <h4>堂号</h4>
+          <div class="hall-tags">
+            <span class="hall-tag">梦溪堂</span>
+            <span class="hall-tag">吴兴堂</span>
+            <span class="hall-tag">汝南堂</span>
+            <span class="hall-tag">永思堂</span>
+            <span class="hall-tag">敦伦堂</span>
+            <span class="hall-tag">聚顺堂</span>
+          </div>
+          <p style="font-size: 0.8125rem; color: rgba(247,243,237,0.35); margin-top: 1.25rem; line-height: 1.7;">堂号是家族的精神象征。「梦溪堂」取自沈括《梦溪笔谈》，以先贤命名，激励后人博学致知。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <section class="section-sm" style="background: var(--bg-primary);">
+    <div class="container">
+      <div class="footer">
+        <span class="footer-text">沈氏源流考 · 百家姓文化系列</span>
+        <span class="footer-text">2026</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Lenis
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // Scroll reveals
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('[data-reveal="fade-up"]').forEach(el => {
+      gsap.from(el, {
+        y: 50, opacity: 0, duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      });
+    });
+
+    gsap.utils.toArray('[data-reveal="stagger"]').forEach(container => {
+      const children = container.tagName === 'UL' || container.classList.contains('origin-list') || container.classList.contains('timeline') || container.classList.contains('figures-grid') || container.classList.contains('hall-section')
+        ? Array.from(container.children)
+        : Array.from(container.children);
+      gsap.from(children, {
+        y: 32, opacity: 0, duration: 0.75, stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: container, start: 'top 85%' }
+      });
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.defaults({ duration: 0, ease: 'none' });
+    }
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
